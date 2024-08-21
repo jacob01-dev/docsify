@@ -50,10 +50,18 @@
 }
 
 @layer base {
-  * {
-    @apply border-border;
+  .code-wrapper {
+    @apply dark bg-gray-950 rounded-md border-[0.5px] border-border;
   }
-  body {
-    @apply bg-background text-foreground;
+
+  .code-language {
+    @apply flex items-center relative bg-muted text-foreground px-4 py-2 text-xs font-sans justify-between rounded-t-md;
+  }
+
+  .code-content {
+    @apply overflow-y-auto p-4;
+  }
+  code {
+    @apply p-2;
   }
 }

@@ -1,0 +1,7 @@
+POST http://localhost:3000/api/create-checkout-session
+
+{
+  "priceId": "price_123456789"
+}
+
+
