@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import AuthLayout from "@/components/AuthLayout";
-import LoginCard from "@/components/LoginCard";
+import AuthLayout from "@/components/Auth/AuthLayout";
+import LoginCard from "@/components/Auth/LoginCard";
 
 const LoginPage = (): JSX.Element => {
   return (

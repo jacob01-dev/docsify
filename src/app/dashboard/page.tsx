@@ -1,6 +1,6 @@
 import DashboardLayout from "./DashboardLayout";
-import ProtectedRoute from "@/components/ProtectedRoute";
-import ChatbotsContainer from "@/components/ChatbotsContainer";
+import ProtectedRoute from "@/components/Auth/ProtectedRoute";
+import ChatbotsContainer from "@/components/Chatbot/ChatbotsContainer";
 
 const DashboardPage = (): JSX.Element => {
   return (

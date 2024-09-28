@@ -6,6 +6,8 @@ export const plans = [
     questions_per_month: 100,
     chatbot: "gpt-4o-mini",
     price: "$0",
+    price_id: "price_1PuF38H7aP3qMhj2p5mlr987",
+    description: "Ideal for personal projects.",
     features: ["1 Chatbot", "Up to 100 questions/m", "GPT 4o mini access"],
   },
   {
@@ -16,6 +18,7 @@ export const plans = [
     chatbot: "gpt-4o",
     price: "$20",
     price_id: "price_1PnLzWH7aP3qMhj29aIhSH6r",
+    description: "Perfect for starting",
     features: ["1 Chatbot", "Up to 500 questions/m", "GPT 4o access"],
   },
   {
@@ -26,7 +29,8 @@ export const plans = [
     chatbot: "gpt-4o",
     price: "$50",
     price_id: "price_1PnM0gH7aP3qMhj2V8eqvJJG",
-    features: ["3 Chatbot", "Up to 2500 questions/m", "GPT 4o access"],
+    description: "Ideal for growing teams.",
+    features: ["3 Chatbots", "Up to 2500 questions/m", "GPT 4o access"],
   },
   {
     title: "Business",
@@ -36,6 +40,7 @@ export const plans = [
     chatbot: "gpt-4o",
     price: "$100",
     price_id: "price_1PnM2NH7aP3qMhj2KLiy9r9B",
-    features: ["5 Chatbot", "Up to 4500 questions/m", "GPT 4o access"],
+    description: "For large-scale projects.",
+    features: ["5 Chatbots", "Up to 4500 questions/m", "GPT 4o access"],
   },
 ];

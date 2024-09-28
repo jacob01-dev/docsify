@@ -21,7 +21,7 @@ interface TierCardProps {
 
 const TierCards = (): JSX.Element => {
   const [selectedTierPriceId, setSelectedTierPriceId] = useState<string>("");
-  const tiers = plans.filter((plan) => plan.title !== "Free");
+  const tiers = plans;
 
   const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value }: { value: string } = e.target;
@@ -39,7 +39,10 @@ const TierCards = (): JSX.Element => {
         <CardContent className="border-b border-t border-border">
           <div className="flex flex-col flex-grow lg:flex-row gap-x-4 gap-y-4 py-4 rounded-sm">
             {tiers.map((tier, index: number) => (
-              <div className="max-w-xl  transition-all duration-300 hover:scale-[1.02] group">
+              <div
+                className="max-w-xl  transition-all duration-300 hover:scale-[1.02] group"
+                key={index}
+              >
                 {/* Radio Card */}
                 <input
                   type="radio"
@@ -70,7 +73,10 @@ const TierCards = (): JSX.Element => {
                             <Dot className="h-5 w-5 text-muted-foreground" />
                           </>
                         ) : (
-                          <p className="text-xs text-muted-foreground">
+                          <p
+                            className="text-xs text-muted-foreground"
+                            key={index}
+                          >
                             {feature}
                           </p>
                         )

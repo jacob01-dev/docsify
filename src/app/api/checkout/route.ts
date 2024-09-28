@@ -1,4 +1,3 @@
-// app/api/create-checkout-session/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@/utils/supabase/server";
@@ -13,9 +12,10 @@ export async function POST(request: NextRequest) {
 
   const {
     data: { user },
+    error: authError,
   } = await supabase.auth.getUser();
 
-  if (!user) {
+  if (authError || !user) {
     return NextResponse.json(
       {
         error: "User not authenticated.",
@@ -25,6 +25,22 @@ export async function POST(request: NextRequest) {
   }
 
   const userId = user.id;
+
+  const validPriceIds = [
+    "price_1PuF38H7aP3qMhj2p5mlr987",
+    "price_1PnLzWH7aP3qMhj29aIhSH6r",
+    "price_1PnM0gH7aP3qMhj2V8eqvJJG",
+    "price_1PnM2NH7aP3qMhj2KLiy9r9B",
+  ];
+
+  if (!validPriceIds.includes(priceId)) {
+    return NextResponse.json(
+      {
+        error: "Invalid price ID.",
+      },
+      { status: 400 }
+    );
+  }
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -36,8 +52,10 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: "subscription",
-      success_url: `${request.headers.get("origin")}/success`,
-      cancel_url: `${request.headers.get("origin")}/cancel`,
+      payment_method_collection:
+        priceId === "price_1PuF38H7aP3qMhj2p5mlr987" ? "if_required" : "always",
+      success_url: `${request.headers.get("origin")}/payment/success`,
+      cancel_url: `${request.headers.get("origin")}/payment/cancel`,
       client_reference_id: userId,
     });
 

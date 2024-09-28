@@ -1,9 +1,9 @@
-import ProtectedRoute from "@/components/ProtectedRoute";
+import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 import DashboardLayout from "../DashboardLayout";
 import TierCards from "@/components/TierCards";
 import StatisticsCards from "@/components/StatisticsCards";
 
-const PaymentsPage = (): JSX.Element => {
+const PaymentsPage = async () => {
   return (
     <ProtectedRoute>
       <DashboardLayout className="gap-y-12 pt-8">

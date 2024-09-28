@@ -1,10 +1,19 @@
 "use client";
+import React from "react";
 import MaxWidthWrapper from "./MaxWidthWrapper";
-import { Bot, CircleHelp, DollarSign, Users } from "lucide-react";
-
+import { CircleHelp, DollarSign } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import useGetSubscription from "@/hooks/useGetSubscription";
+import useGetQuestionsRemaining from "@/hooks/useGetQuestionsRemaining";
+import NumberTicker from "./magicui/number-ticker";
+import { useState } from "react";
 
 const StatisticsCards = (): JSX.Element => {
+  const plan = useGetSubscription();
+  const [questionsRemaining, setQuestionsRemaining] = useState<number>(0);
+
+  useGetQuestionsRemaining({ setQuestionsRemaining: setQuestionsRemaining });
+
   return (
     <MaxWidthWrapper>
       <div className="w-full flex flex-col items-center lg:flex-row gap-x-6 gap-y-6">
@@ -16,9 +25,24 @@ const StatisticsCards = (): JSX.Element => {
             <CircleHelp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent className="">
-            <div className="text-2xl font-bold">0</div>
+            <div className="text-2xl font-bold">
+              {plan ? (
+                <h2>{plan.questions_per_month - questionsRemaining}</h2>
+              ) : (
+                "Loading"
+              )}
+            </div>
             <p className="text-xs text-muted-foreground">
-              Reached 0% of monthly quota
+              Reached{" "}
+              <span className="font-medium text-foreground/80">
+                {plan && questionsRemaining != null
+                  ? ((plan.questions_per_month - questionsRemaining) /
+                      plan.questions_per_month) *
+                    100
+                  : "0"}
+                %
+              </span>{" "}
+              of monthly quota
             </p>
           </CardContent>
         </Card>
@@ -28,23 +52,9 @@ const StatisticsCards = (): JSX.Element => {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">Free</div>
+            <div className="text-2xl font-bold">{plan?.title ?? "Loading"}</div>
             <p className="text-xs text-muted-foreground">
-              Perfect for personal usage
-            </p>
-          </CardContent>
-        </Card>
-        <Card className="w-full min-w-sm flex-grow bg-primary-foreground">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Created Chatbots
-            </CardTitle>
-            <Bot className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">1</div>
-            <p className="text-xs text-muted-foreground">
-              Reached 100% of quota
+              {plan?.description ?? "Loading"}
             </p>
           </CardContent>
         </Card>

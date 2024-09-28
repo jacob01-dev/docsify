@@ -1,13 +1,11 @@
 import { cn } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 
 const Spinner = ({ className }: { className?: string }): JSX.Element => {
   return (
-    <div
-      className={cn(
-        "animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-r-foreground border-l-background",
-        className
-      )}
-    ></div>
+    <div>
+      <Loader2 className={cn("w-4 h-4 animate-spin", className)} />
+    </div>
   );
 };
 

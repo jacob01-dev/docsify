@@ -1,0 +1,172 @@
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const AccordionItem = ({
+  title,
+  content,
+  isOpen,
+  maxHeight = 180,
+  onClick,
+}: {
+  title: string;
+  content: string;
+  isOpen: boolean;
+  maxHeight?: number;
+  onClick: () => void;
+}) => {
+  return (
+    <motion.div
+      className="p-0.5 rounded-lg relative overflow-hidden cursor-pointer "
+      onClick={onClick}
+    >
+      <motion.div
+        className="p-6 rounded-[7px] flex flex-col justify-between relative z-20 transform-gpu bg-black dark:[border:1px_solid_rgba(255,255,255,.1)]"
+        animate={{ height: isOpen ? maxHeight : 72 }}
+      >
+        <div>
+          <motion.p
+            className="text-xl font-medium w-full flex justify-between items-center"
+            animate={{
+              color: isOpen ? "rgba(255, 255, 255, 1)" : "rgb(163 163 163)",
+            }}
+          >
+            {title}
+            <motion.svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="ml-auto"
+              animate={{ rotate: isOpen ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </motion.svg>
+          </motion.p>
+          <motion.p
+            className="mt-4 text-muted-foreground"
+            animate={{ opacity: isOpen ? 1 : 0 }}
+          >
+            {content}
+          </motion.p>
+        </div>
+      </motion.div>
+      <motion.div
+        className="absolute inset-0 z-10 bg-gradient-to-br from-white via-[#71717a] to-[#ffffff1f]"
+        animate={{ opacity: isOpen ? 1 : 0 }}
+      ></motion.div>
+      <div className="absolute inset-0 z-0 "></div>
+    </motion.div>
+  );
+};
+export default AccordionItem;
+
+import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { PlusIcon } from "@radix-ui/react-icons";
+import AccordionItem from "./AnimatedAccordionItem";
+import AnimatedFileInput from "./AnimatedFileInput";
+import CustomizeCardPreview from "./CustomizeCardPreview";
+import { motion } from "framer-motion";
+import { Box } from "lucide-react";
+import Loader from "./LoaderWrapper";
+import DeployButton from "./DeployButton";
+
+const items = [
+  {
+    title: "Upload",
+    content: `Prepare your code documentation according to the guidelines for best results.`,
+    maxHeight: 160,
+  },
+  {
+    title: "Customize",
+    content: "Upload your icon, change colors to suit your brand.",
+    maxHeight: 140,
+  },
+  {
+    title: "Deploy",
+    content: "Deploying your tailored chatbot to the web is as easy as 1-2-3.",
+    maxHeight: 140,
+  },
+];
+
+const Accordion = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const handleItemClick = (index: number | null) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  const ComponentPicker = () => {
+    switch (openIndex) {
+      case null:
+        return (
+          <div className="p-4 flex items-center justify-center ">
+            <Loader />
+          </div>
+        );
+      case 0:
+        return <AnimatedFileInput />;
+      case 1:
+        return (
+          <CustomizeCardPreview
+            title="Chat Customization"
+            description="Customize your chat appearance"
+          />
+        );
+      case 2:
+        return <DeployButton />;
+    }
+  };
+
+  return (
+    <div className="w-full max-w-screen-xl mx-auto grid gap-8 grid-cols-1 lg:grid-cols-2 px-6 z-0">
+      <div>
+        <h3 className="text-4xl font-bold mb-8 text-foreground ">
+          Get Started
+        </h3>
+        <div className="flex flex-col gap-4">
+          {items.map((item, index) => (
+            <AccordionItem
+              key={index}
+              title={item.title}
+              content={item.content}
+              isOpen={openIndex === index}
+              onClick={() => handleItemClick(index)}
+              maxHeight={item.maxHeight}
+            />
+          ))}
+        </div>
+      </div>
+      <div
+        className={cn(
+          "bg-slate-300 aspect-[4/3] lg:aspect-auto h-full w-full relative",
+          "bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
+          "transform-gpu dark:bg-black dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-30px_#ffffff1f_inset] rounded-tr-sm rounded-bl-sm"
+        )}
+      >
+        <div className="w-full min-h-full flex items-center justify-center py-6">
+          {/* Content of right box */}
+          {<ComponentPicker />}
+        </div>
+        <PlusIcon
+          className="absolute text-white -top-3 -left-3"
+          width={24}
+          height={24}
+        />
+        <PlusIcon
+          className="absolute text-white -bottom-3 -right-3"
+          width={24}
+          height={24}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Accordion;

@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Docsify | Chat with your Code Documentation",
   description:
     "AI powered app that allows you to chat with your code documentation for your project",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

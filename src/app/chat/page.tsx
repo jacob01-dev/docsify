@@ -1,4 +1,4 @@
-import GridPattern from "@/components/AnimatedGridPattern";
+import GridPattern from "@/components/LandingPageDemos/AnimatedGridPattern";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button } from "@/components/ui/button";
 import {

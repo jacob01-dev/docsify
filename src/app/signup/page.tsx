@@ -1,6 +1,6 @@
 import Link from "next/link";
-import AuthLayout from "@/components/AuthLayout";
-import SignupCard from "@/components/SignupCard";
+import AuthLayout from "@/components/Auth/AuthLayout";
+import SignupCard from "@/components/Auth/SignupCard";
 
 const SignupPage = (): JSX.Element => {
   return (

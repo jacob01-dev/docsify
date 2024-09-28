@@ -7,26 +7,40 @@ import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { PineconeStore } from "@langchain/pinecone";
 import { createClient } from "@/utils/supabase/server";
 
-// Disable body parsing by Next.js, so we can handle file uploads
+const PINECONE_INDEXES = ["docs1", "docs2", "docs3", "docs4", "docs5"];
+const MAX_NAMESPACES = 100;
+
+async function findAvailableIndex(
+  chatbot_id: string
+): Promise<{ indexName: string; indexNumber: number }> {
+  for (let i = 0; i < PINECONE_INDEXES.length; i++) {
+    const indexName = PINECONE_INDEXES[i];
+    const index = pinecone.Index(indexName);
+    const stats = await index.describeIndexStats();
+    const namespaceCount = Object.keys(stats.namespaces || {}).length;
+
+    if (namespaceCount < MAX_NAMESPACES) {
+      return { indexName, indexNumber: i + 1 };
+    }
+  }
+  throw new Error("No available Pinecone indexes with free namespace slots.");
+}
 
 export async function POST(req: NextRequest) {
   const supabase = createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
   try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
     if (!user) {
       return NextResponse.json(
-        {
-          error: "User not authenticated.",
-        },
+        { error: "User not authenticated." },
         { status: 401 }
       );
     }
 
-    // Get the file from the request
     const formData = await req.formData();
     const file = formData.get("file") as File;
 
@@ -37,12 +51,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Validate file type (PDF)
     if (file.type !== "application/pdf") {
       return NextResponse.json(
-        {
-          error: "Only PDF files are supported.",
-        },
+        { error: "Only PDF files are supported." },
         { status: 400 }
       );
     }
@@ -50,55 +61,56 @@ export async function POST(req: NextRequest) {
     const loader = new PDFLoader(file);
     const rawDocs = await loader.load();
 
-    const pattern = /(?=#\[[^\]]+\])/g;
-    const combinedText = rawDocs.map((doc) => doc.pageContent).join("\n");
-    const chunks = combinedText.split(pattern);
-    const totalPages = rawDocs[0].metadata.pdf.totalPages;
-    const docs = chunks.map((chunk, index) => ({
-      pageContent: chunk.trim(),
-      metadata: { ...rawDocs[0].metadata, page: index + 1 }, // You can customize metadata as needed
-    }));
+    const textSplitter = new RecursiveCharacterTextSplitter({
+      chunkSize: 1000,
+      chunkOverlap: 200,
+    });
 
-    // Create Chatbot and insert record inside supabase databse
+    const docs = await textSplitter.splitDocuments(rawDocs);
 
     const chatbot_id = uuidv4();
 
-    const { data, error } = await supabase
-      .from("chatbots")
-      .insert({
-        user: user.id,
-        public_id: chatbot_id,
-      })
-      .select();
-
-    console.log(error);
-    if (error) {
-      return NextResponse.json(
-        {
-          error: "Failed to create chatbot",
-        },
-        { status: 400 }
-      );
-    }
-    const index = pinecone.Index("docs");
+    // Find an available Pinecone index
+    const { indexName, indexNumber } = await findAvailableIndex(chatbot_id);
+    const index = pinecone.Index(indexName);
 
     try {
       await PineconeStore.fromDocuments(docs, openAIEmbeddings, {
         pineconeIndex: index,
         namespace: chatbot_id,
       });
-    } catch (error: any) {
-      console.log(error);
+    } catch (error) {
+      console.error("Pinecone error:", error);
       return NextResponse.json(
-        {
-          error: "Failed to insert vectors into Database",
-        },
+        { error: "Failed to insert vectors into Database" },
         { status: 400 }
       );
     }
 
-    return NextResponse.json({ data: "ok", status: 200 }, { status: 200 });
+    // Insert record into Supabase with the index_id as a number
+    const { data, error } = await supabase
+      .from("chatbots")
+      .insert({
+        user: user.id,
+        public_id: chatbot_id,
+        index_id: indexNumber,
+      })
+      .select();
+
+    if (error) {
+      console.error("Supabase error:", error);
+      return NextResponse.json(
+        { error: "Failed to create chatbot" },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json({ success: true, data: data }, { status: 200 });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("Unexpected error:", error);
+    return NextResponse.json(
+      { sucess: false, error: error.message },
+      { status: 500 }
+    );
   }
 }

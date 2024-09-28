@@ -3,7 +3,6 @@ import { Button } from "./ui/button";
 import { ArrowUpRight, Loader, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import Spinner from "./Spinner";
 import { cn } from "@/lib/utils";
 import { useToast } from "./ui/use-toast";
 
