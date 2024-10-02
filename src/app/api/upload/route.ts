@@ -70,7 +70,6 @@ export async function POST(req: NextRequest) {
 
     const chatbot_id = uuidv4();
 
-    // Find an available Pinecone index
     const { indexName, indexNumber } = await findAvailableIndex(chatbot_id);
     const index = pinecone.Index(indexName);
 

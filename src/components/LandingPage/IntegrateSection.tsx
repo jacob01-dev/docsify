@@ -90,10 +90,14 @@ const IntegrateSection = (): JSX.Element => {
                   <span className="text-blue-400">{"<script "}</span>
                   <span className="text-green-400">src</span>
                   <span className="text-blue-400">=</span>
-                  <span className="text-orange-400">"{base_widget_url}"</span>
+                  <span className="text-orange-400">
+                    &quot;{base_widget_url}&quot;
+                  </span>
                   <span className="text-green-400"> id</span>
                   <span className="text-blue-400">=</span>
-                  <span className="text-orange-400">"your-chatbot-id"</span>
+                  <span className="text-orange-400">
+                    &quot;your-chatbot-id&quot;
+                  </span>
                   <span className="text-blue-400">{"></script>"}</span>
                 </p>
               </code>

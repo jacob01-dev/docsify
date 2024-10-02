@@ -1,0 +1,15 @@
+## Integrate Docsify with your website
+
+To integrate Docsify with your website, follow these steps:
+1. Create account on [docsify.tech](https://docsify.tech)
+2. Choose a plan that fits your needs
+3. Create your Personalized chatbot in dashboard [docsify.tech/dashboard](https://docsify.tech/dashboard)
+4. Copy this script tag and paste it into your HTML: <script src="https://cdn.jsdelivr.net/gh/jacob01-dev/Docsify-widget@main/widget.min.js" id="your-chatbot-id"></script>
+5. Done.
+
+## FAQs
+
+Here are some FAQs you may have:
+- What can I use Docsify for? If you have code documentation on your website, Docsify lets you turn it into a chatbot. It's great for businesses and SaaS platforms to enhance support and user experience.
+- What LLMs are supported? Right now, Docsify supports only GPT-4o and GPT-4o mini, but in the near future we will add support for Claude 3.5 Sonnet.
+- What file formats are supported? For now Docsify supports only PDF files, but we plan to add support for more file formats and links.

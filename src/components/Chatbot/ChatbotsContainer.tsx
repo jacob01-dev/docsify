@@ -23,8 +23,8 @@ const ChatbotsContainer = (): JSX.Element => {
     maxChatbots: 0,
     canCreateChatbot: false,
   });
-
-  const subscription = useGetSubscription();
+  const [subscription, setSubscription] = useState<any>();
+  useGetSubscription({ setSubscription: setSubscription });
 
   const fetchChatbots = useCallback(async () => {
     const { data: sessionData } = await supabase.auth.getSession();

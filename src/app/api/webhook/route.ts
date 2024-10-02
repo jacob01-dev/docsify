@@ -35,10 +35,8 @@ export async function POST(req: NextRequest) {
   try {
     switch (event.type) {
       case "checkout.session.completed": {
-        console.log("checkout.session.completed");
         const session = event.data.object as Stripe.Checkout.Session;
         const subscriptionId = session.subscription as string;
-        console.log(session);
         await updateSubscriptionInDatabase(
           supabase,
           session.client_reference_id as string,

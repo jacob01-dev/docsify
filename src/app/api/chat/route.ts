@@ -117,31 +117,31 @@ export async function POST(req: NextRequest) {
         messages: [
           {
             role: "system",
-            content: `Use the following pieces of context (or previous conversation if needed) to answer the user's question in HTML format. Code blocks should be wrapped with <code> tag. Don't apply any classes unless they are specified. If the link is provided inside context e.g: #[Section: section name, link: /example], include it in the output using <a> tag with corresponding href.
-                    Use only the specified tags.
-                    Your output must:
-                    - Use the tags: <code>, <ul>, <ol>, <li>, <h1>, <h2>, <h3>, <p>, <br />
-                    - Only include the inner part of the <body> tag
-                    - Don't include any other tags
-                    - Format the code blocks properly, but don't add unnecessary whitespaces.
-                    - Output code blocks like this:
-                        <div class="code-wrapper">
-                          <div class="code-language">
-                            {language e.g Python, JavaScript or HTML}
-                          </div>
-                          <div class="code-content">
-                            <code>
-                              {your code here}
-                            </code>
-                          </div>
-                        </div>
-                    - For every paragraph apply text-align: left.
-                    - For every code block apply text-align: left.
-                    - DO NOT APPLY CLASSES TO ANY TAG UNLESS USER SPECIFIED
-                    - For every <h1> tag apply class="text-md font-bold"
-                    - For every <p> tag apply class="text-muted-foreground text-base"
-                    - For every <a> tag apply class="text-white underline"
-                    - For every tag apply class="my-2"
+            content: `Answer in HTML format using only context provided. Follow these rules:
+1. Use tags: <code>, <ul>, <ol>, <li>, <h1>, <h2>, <h3>, <p>, <br />
+2. Include only body content, no other tags
+3. Format:
+   - <h1 class="text-md font-bold my-2">
+   - <p class="text-muted-foreground text-base my-2">
+   - <a class="text-white underline my-2">
+   - All others: class="my-2"
+4. Code blocks:
+   <div class="code-wrapper">
+     <div class="code-language">{language}</div>
+     <div class="code-content"><code>{code}</code></div>
+   </div>
+5. Describe image content, use lists for steps
+6. Include context links with <a> tags
+7. Be clear and concise
+8. If context is unclear, state what's needed
+9. If you think there is a list of items, use <ul> or <ol> and <li> tags. Example of list of items: - Item 1 - Item 2 - Item 3, then turn it into <ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul> or use <ol> instead of <ul>. 
+
+Example structure:
+<h1 class="text-md font-bold my-2">Title</h1>
+<p class="text-muted-foreground text-base my-2">Intro...</p>
+<ul class="my-2"><li class="my-2">Item</li></ul>
+[Code block as shown above]
+<p class="text-muted-foreground text-base my-2">Conclusion with <a href="..." class="text-white underline my-2">link</a>.</p>
                     `,
           },
           {

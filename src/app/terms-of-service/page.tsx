@@ -178,7 +178,7 @@ const TermsOfService = () => {
             <p>
               If you have any questions about these Terms, please contact us at{" "}
               <span className="text-sky-500 hover:text-sky-600 hover:underline hover:cursor-pointer">
-                jacob@docsify.tech
+                jacob.boron6@gmail.com
               </span>
             </p>
           </section>

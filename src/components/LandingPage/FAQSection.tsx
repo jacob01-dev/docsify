@@ -16,17 +16,17 @@ const faqs = [
   {
     question: "What can I use Docsify for?",
     answer:
-      "If you have code documentation on your website, Docsify lets you turn it into a chatbot. It’s great for businesses and SaaS platforms to enhance support and user experience.",
+      "If you have code documentation on your website, Docsify lets you turn it into a chatbot. It's great for businesses and SaaS platforms to enhance support and user experience.",
   },
   {
     question: "What LLMs are supported?",
     answer:
-      "Right now, Docsify supports only GPT-4o and GPT-4o mini, but in the near future we will add support for Claude 3.5 Sonnet",
+      "Right now, Docsify supports only GPT-4o and GPT-4o mini, but in the near future we will add support for Claude 3.5 Sonnet.",
   },
   {
     question: "What file formats are supported?",
     answer:
-      "For now Docsify supports only PDF files, but we plan to add support for more file formats and links",
+      "For now Docsify supports only PDF files, but we plan to add support for more file formats and links.",
   },
 ];
 
@@ -146,7 +146,7 @@ const FAQSection = () => {
               className="text-base text-muted-foreground text-center px-12"
               variants={itemVariants}
             >
-              Everything you need to know about the product and billing.
+              Everything you need to know about the product.
             </motion.p>
           </div>
           <div className="">

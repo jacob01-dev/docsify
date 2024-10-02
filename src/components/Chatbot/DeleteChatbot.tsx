@@ -27,10 +27,15 @@ const DeleteChatbot = ({
     dataToSend.append("chatbot_id", chatbot_public_id);
 
     try {
-      const response = await fetch("http://localhost:3000/api/delete", {
-        method: "POST",
-        body: dataToSend,
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_PRODUCTION === "true"
+          ? "https://docsify.tech/api/delete"
+          : "http://localhost:3000/api/delete",
+        {
+          method: "POST",
+          body: dataToSend,
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();

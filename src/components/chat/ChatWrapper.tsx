@@ -69,7 +69,7 @@ const ChatWrapper = ({ chatbot_id }: { chatbot_id: string }): JSX.Element => {
           <div className="flex flex-col items-center justify-center h-full text-center">
             <MessageSquare className="w-12 h-12 text-blue-500 mb-4" />
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Clear doubts, spark clarity!
+              Ready to Code?
             </h2>
             <p className="text-gray-400">
               Ask your first question to get started.
@@ -154,7 +154,7 @@ const ChatWrapper = ({ chatbot_id }: { chatbot_id: string }): JSX.Element => {
                 className="flex-grow resize-none rounded-lg border border-gray-300 bg-white text-gray-900 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 rows={1}
                 maxRows={4}
-                placeholder="Type your message..."
+                placeholder="Ask me a question..."
                 onKeyDown={(e) => {
                   if (
                     e.key === "Enter" &&
@@ -177,7 +177,11 @@ const ChatWrapper = ({ chatbot_id }: { chatbot_id: string }): JSX.Element => {
             <p className="text-center text-xs text-gray-500 mt-2 -mb-2">
               Powered by{" "}
               <Link
-                href={"http://localhost:3000"}
+                href={
+                  process.env.NEXT_PUBLIC_PRODUCTION === "true"
+                    ? "https://docsify.tech"
+                    : "http://localhost:3000"
+                }
                 target="_blank"
                 className="font-medium text-blue-600 hover:underline"
               >

@@ -12,6 +12,8 @@ import { z } from "zod";
 import PasswordInput from "./PasswordInput";
 import { login } from "@/app/login/action";
 import { createClient } from "@/utils/supabase/client";
+import { useSearchParams } from "next/navigation";
+import { useToast } from "../ui/use-toast";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -31,6 +33,10 @@ const LoginCard = (): JSX.Element => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+  const [isVerificationEmailSent, setIsVerificationEmailSent] =
+    useState<boolean>(searchParams.get("e") === "true" ? true : false);
+
   const [errors, setErrors] = useState<{
     email?: string;
     password?: string;
@@ -39,6 +45,45 @@ const LoginCard = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const supabase = createClient();
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setErrors({});
+
+    const result = loginSchema.safeParse({ email, password });
+
+    if (!result.success) {
+      const errorMessages = result.error.format();
+      setErrors({
+        email: errorMessages.email?._errors[0],
+        password: errorMessages.password?._errors[0],
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
+      await login(formData);
+      setUserLoggedIn(true);
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Something went wrong during login.";
+      setErrors({ loggingIn: errorMessage });
+      toast({
+        title: "Login failed",
+        description: errorMessage,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     const checkUserLoggedIn = async () => {
@@ -69,7 +114,7 @@ const LoginCard = (): JSX.Element => {
             Enter your email below to login to your account
           </p>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
@@ -107,9 +152,15 @@ const LoginCard = (): JSX.Element => {
                 <p className="text-red-500 text-sm">{errors.password}</p>
               )}
             </div>
+            {isVerificationEmailSent && (
+              <p className="text-xs text-center text-muted-foreground">
+                Please check your email to verify your account.
+              </p>
+            )}
             <Button
               className={`w-full ${isLoading ? "pointer-events-none" : ""}`}
-              formAction={login}
+              type="submit"
+              disabled={isLoading}
             >
               {isLoading ? <Spinner /> : "Log in"}
             </Button>

@@ -43,7 +43,15 @@ const Header = (): JSX.Element => {
         </div>
         <nav className="flex items-center justify-center text-foreground gap-x-8">
           <div>
-            <Link href={"#pricing"}>
+            <Link
+              href={"#pricing"}
+              scroll={false}
+              onClick={(e) => {
+                document.getElementById("pricing")?.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
+            >
               <h2 className="text-lg transition-all cursor-pointer hover:text-neutral-500">
                 Pricing
               </h2>

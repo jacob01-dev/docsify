@@ -18,7 +18,7 @@ export async function login(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    redirect("/error");
+    throw new Error(error.message || "Something went wrong during login.");
   }
 
   revalidatePath("/", "layout");
@@ -105,5 +105,5 @@ export async function signup(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/dashboard");
+  redirect("/login?e=true");
 }

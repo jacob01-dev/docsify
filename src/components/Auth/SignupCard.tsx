@@ -49,7 +49,11 @@ const SignupCard = (): JSX.Element => {
   const router = useRouter();
   const supabase = createClient();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setErrors({});
+
     const result = signupSchema.safeParse({ email, password, confirmPassword });
 
     if (!result.success) {
@@ -59,18 +63,19 @@ const SignupCard = (): JSX.Element => {
         password: errorMessages.password?._errors[0],
         confirmPassword: errorMessages.confirmPassword?._errors[0],
       });
-    } else {
-      setIsLoading(true);
-      setErrors({});
+      setIsLoading(false);
+      return;
+    }
 
-      try {
-        const formData = new FormData();
-        formData.append("email", email);
-        formData.append("password", password);
-        await signup(formData);
-      } catch (error) {
-        setErrors({ loggingIn: "Something went wrong. Please try again" });
-      }
+    try {
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
+      await signup(formData);
+    } catch (error) {
+      setErrors({ loggingIn: "Something went wrong. Please try again" });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -105,7 +110,7 @@ const SignupCard = (): JSX.Element => {
             Enter your information to create an account
           </p>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
@@ -145,6 +150,7 @@ const SignupCard = (): JSX.Element => {
               <Input
                 id="confirm_password"
                 type="password"
+                name="confirmPassword"
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -154,9 +160,9 @@ const SignupCard = (): JSX.Element => {
               )}
             </div>
             <Button
-              type="submit"
               className={`w-full ${isLoading ? "pointer-events-none" : ""}`}
-              formAction={handleSubmit}
+              type="submit"
+              disabled={isLoading}
             >
               {isLoading ? <Spinner /> : "Sign up"}
             </Button>

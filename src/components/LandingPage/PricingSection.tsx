@@ -4,7 +4,7 @@ import PricingCardsContainer from "./PricingCardsContainer";
 const PricingSection = (): JSX.Element => {
   return (
     <MaxWidthWrapper
-      className="relative w-full min-h-screen box-border grid grid-flow-row py-12 gap-y-14 lg:gap-y-0 lg:grid-rows-11 z-[2]"
+      className="relative w-full min-h-screen box-border grid grid-flow-row py-12 gap-y-14 lg:gap-y-0 lg:grid-rows-11 z-[2] scroll-mt-20 lg:-scroll-mt-20"
       id="pricing"
     >
       <div className="w-full flex items-center justify-center lg:row-span-4 z-[3] flex-col">

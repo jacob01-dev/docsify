@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 import AuthLayout from "@/components/Auth/AuthLayout";
 import LoginCard from "@/components/Auth/LoginCard";
 

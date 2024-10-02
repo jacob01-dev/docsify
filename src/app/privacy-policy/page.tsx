@@ -159,7 +159,7 @@ const PrivacyPolicyPage = (): JSX.Element => {
                 to us. You can do this by logging into your account or
                 contacting us at{" "}
                 <span className="text-sky-400 hover:text-sky-500 hover:underline cursor-pointer">
-                  jacob@docsify.tech
+                  jacob.boron6@gmail.com
                 </span>
               </li>
               <li>
@@ -218,7 +218,7 @@ const PrivacyPolicyPage = (): JSX.Element => {
               <li>
                 <strong>Email: </strong>
                 <span className="text-sky-400 hover:text-sky-500 hover:underline cursor-pointer">
-                  jacob@docsify.tech
+                  jacob.boron6@gmail.com
                 </span>
               </li>
               <li>

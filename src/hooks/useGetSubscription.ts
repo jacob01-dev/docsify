@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 
-const useGetSubscription = (): any => {
-  const [subscription, setSubscription] = useState<any>();
+const useGetSubscription = ({
+  setSubscription,
+}: {
+  setSubscription: (data: any) => void;
+}) => {
   useEffect(() => {
     const getSubscription = async () => {
       const response = await fetch("/api/subscription/plan");
@@ -10,7 +13,6 @@ const useGetSubscription = (): any => {
     };
     getSubscription();
   }, []);
-  return subscription;
 };
 
 export default useGetSubscription;

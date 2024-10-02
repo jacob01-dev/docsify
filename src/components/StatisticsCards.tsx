@@ -9,7 +9,8 @@ import NumberTicker from "./magicui/number-ticker";
 import { useState } from "react";
 
 const StatisticsCards = (): JSX.Element => {
-  const plan = useGetSubscription();
+  const [plan, setPlan] = useState<any>();
+  useGetSubscription({ setSubscription: setPlan });
   const [questionsRemaining, setQuestionsRemaining] = useState<number>(0);
 
   useGetQuestionsRemaining({ setQuestionsRemaining: setQuestionsRemaining });
