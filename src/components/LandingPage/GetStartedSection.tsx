@@ -91,7 +91,7 @@ const GetStartedSection = () => {
   }, [IsInView]);
 
   return (
-    <MaxWidthWrapper className="min-h-screen max-w-screen relative flex flex-col items-center justify-center bg-background p-0 md:p-16 py-12 px-4">
+    <MaxWidthWrapper className="min-h-screen max-w-screen relative flex flex-col items-center justify-center bg-background p-0 md:p-16 py-20 px-4 lg:py-12">
       <motion.div
         className="w-full min-h-full"
         ref={divRef}

@@ -18,7 +18,7 @@ const PricingCard = ({
 }): JSX.Element => {
   return (
     <MagicCard
-      className="min-w-[400px] min-h-[550px] max-w-[400px] px-6 lg:px-8 flex flex-col gap-y-4 p-8 border-border border rounded-xl bg-background/40 bg-clip-padding backdrop-filter backdrop-blur-sm"
+      className="min-w-[350px] min-h-[550px] max-w-[350px] px-6 lg:px-8 flex flex-col gap-y-4 p-8 border-border border rounded-xl bg-background/40 bg-clip-padding backdrop-filter backdrop-blur-sm"
       gradientSize={200}
       gradientOpacity={0.5}
       gradientColor="#262626"

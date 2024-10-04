@@ -8,7 +8,7 @@ const PricingSection = (): JSX.Element => {
       id="pricing"
     >
       <div className="w-full flex items-center justify-center lg:row-span-4 z-[3] flex-col">
-        <h3 className="px-4 max-w-7xl bg-gradient-to-b from-white to-[#71717a] bg-clip-text text-center text-3xl font-medium leading-tight text-transparent sm:text-5xl sm:leading-tight md:text-7xl md:leading-tight">
+        <h3 className="px-4 max-w-7xl bg-gradient-to-b from-white to-[#71717a] bg-clip-text text-center text-4xl font-medium leading-tight text-transparent sm:text-5xl sm:leading-tight md:text-7xl md:leading-tight">
           The right price for for your needs
         </h3>
       </div>

@@ -62,7 +62,7 @@ const HeroSection = (): JSX.Element => {
       >
         <motion.h2
           variants={itemVariants}
-          className="z-10 px-4 max-w-7xl bg-gradient-to-br from-white to-[#71717a] bg-clip-text text-center text-3xl font-medium leading-tight text-transparent sm:text-5xl sm:leading-tight md:text-7xl md:leading-tight"
+          className="z-10 px-4 max-w-7xl bg-gradient-to-br from-white to-[#71717a] bg-clip-text text-center text-4xl font-medium leading-tight text-transparent sm:leading-tight md:text-7xl md:leading-tight"
         >
           Transform Your Code Documentation Into a Chatbot
         </motion.h2>
