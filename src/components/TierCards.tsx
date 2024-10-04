@@ -29,10 +29,10 @@ const TierCards = (): JSX.Element => {
   const isUserSubscribed = userPlan?.isSubscribed;
 
   useEffect(() => {
-    if (userPlan && userPlan.price_id === "price_1PuF38H7aP3qMhj2p5mlr987") {
+    if (userPlan && userPlan.price_id === "price_1Q5oDWH7aP3qMhj2Z2ZQ9xdY") {
       setTiers(
         tiers.filter(
-          (tier) => tier.price_id !== "price_1PuF38H7aP3qMhj2p5mlr987"
+          (tier) => tier.price_id !== "price_1Q5oDWH7aP3qMhj2Z2ZQ9xdY" //"price_1PuF38H7aP3qMhj2p5mlr987"
         )
       );
     }

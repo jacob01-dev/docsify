@@ -27,10 +27,14 @@ export async function POST(request: NextRequest) {
   const userId = user.id;
 
   const validPriceIds = [
-    "price_1PuF38H7aP3qMhj2p5mlr987",
-    "price_1PnLzWH7aP3qMhj29aIhSH6r",
-    "price_1PnM0gH7aP3qMhj2V8eqvJJG",
-    "price_1PnM2NH7aP3qMhj2KLiy9r9B",
+    // "price_1PuF38H7aP3qMhj2p5mlr987",
+    // "price_1PnLzWH7aP3qMhj29aIhSH6r",
+    // "price_1PnM0gH7aP3qMhj2V8eqvJJG",
+    // "price_1PnM2NH7aP3qMhj2KLiy9r9B",
+    "price_1Q5oDWH7aP3qMhj2Z2ZQ9xdY", // free
+    "price_1Q5oEWH7aP3qMhj2rDsZF0gO", // basic
+    "price_1Q5oFCH7aP3qMhj2uGpCV2K5", // professional
+    "price_1Q5oFlH7aP3qMhj24UGoc7Ny", // business
   ];
 
   if (!validPriceIds.includes(priceId)) {
@@ -53,7 +57,7 @@ export async function POST(request: NextRequest) {
       ],
       mode: "subscription",
       payment_method_collection:
-        priceId === "price_1PuF38H7aP3qMhj2p5mlr987" ? "if_required" : "always",
+        priceId === validPriceIds[0] ? "if_required" : "always",
       success_url: `${request.headers.get("origin")}/payment/success`,
       cancel_url: `${request.headers.get("origin")}/payment/cancel`,
       client_reference_id: userId,
