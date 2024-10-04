@@ -12,7 +12,6 @@ import { z } from "zod";
 import PasswordInput from "./PasswordInput";
 import { login } from "@/app/login/action";
 import { createClient } from "@/utils/supabase/client";
-import { useSearchParams } from "next/navigation";
 import { useToast } from "../ui/use-toast";
 
 const loginSchema = z.object({
@@ -33,9 +32,8 @@ const LoginCard = (): JSX.Element => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
-  const searchParams = useSearchParams();
   const [isVerificationEmailSent, setIsVerificationEmailSent] =
-    useState<boolean>(searchParams.get("e") === "true" ? true : false);
+    useState<boolean>(false);
 
   const [errors, setErrors] = useState<{
     email?: string;
@@ -46,6 +44,12 @@ const LoginCard = (): JSX.Element => {
   const router = useRouter();
   const supabase = createClient();
   const { toast } = useToast();
+
+  // Move searchParams check to useEffect to avoid Suspense requirement
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setIsVerificationEmailSent(params.get("e") === "true");
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -164,9 +168,6 @@ const LoginCard = (): JSX.Element => {
             >
               {isLoading ? <Spinner /> : "Log in"}
             </Button>
-            {/* <Button variant="outline" className="w-full">
-            Login with Google
-          </Button> */}
           </div>
         </form>
         <div className="mt-4 text-center text-sm">
@@ -179,4 +180,5 @@ const LoginCard = (): JSX.Element => {
     </div>
   );
 };
+
 export default LoginCard;
