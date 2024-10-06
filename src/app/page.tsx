@@ -25,7 +25,7 @@ export default function Home() {
       </MaxWidthWrapper>
       <Script
         src={base_widget_url}
-        id="5a3a2d97-061e-4ced-8989-6974a78a4054"
+        id="079444f9-122b-4de0-a7e0-17ea2a35f524"
         data-color="#09090b"
       ></Script>
     </>

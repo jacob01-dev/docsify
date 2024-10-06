@@ -57,6 +57,7 @@ export async function signup(formData: FormData) {
       data: {
         plan: "free",
       },
+      emailRedirectTo: "https://www.docsify.tech/login",
     },
   });
 
