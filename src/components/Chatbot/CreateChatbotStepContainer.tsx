@@ -40,7 +40,7 @@ const CreateChatbotStepContainer = ({
       setIsLoading(true);
       const response = await fetch(
         process.env.NEXT_PUBLIC_PRODUCTION === "true"
-          ? "https://docsify.tech/api/upload"
+          ? "api/upload"
           : "http://localhost:3000/api/upload",
         {
           method: "POST",
