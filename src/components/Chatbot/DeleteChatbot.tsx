@@ -29,7 +29,7 @@ const DeleteChatbot = ({
     try {
       const response = await fetch(
         process.env.NEXT_PUBLIC_PRODUCTION === "true"
-          ? "https://docsify.tech/api/delete"
+          ? "/api/delete"
           : "http://localhost:3000/api/delete",
         {
           method: "POST",
