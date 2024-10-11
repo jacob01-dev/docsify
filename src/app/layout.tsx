@@ -6,6 +6,9 @@ import { Toaster } from "@/components/ui/toaster";
 const rubik = Rubik({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  verification: {
+    google: "3E4ho7xj5J19g3F-BdwiMUDsq0xy1jJj5j0hr_T0IDM",
+  },
   title: "Docsify | Transform your Code Documentation into a Chatbot",
   description:
     "AI powered app that allows you to chat with your code documentation for your project",
