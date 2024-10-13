@@ -122,9 +122,9 @@ export async function POST(req: NextRequest) {
 2. Include only body content, no other tags
 3. Format:
    - <h1 class="text-md font-bold my-2">
-   - <p class="text-muted-foreground text-base my-2">
-   - <a class="text-white underline my-2">
-   - All others: class="my-2"
+   - <p class="text-base">
+   - <a class="text-white underline">
+   - All others: class=""
 4. Code blocks:
    <div class="code-wrapper">
      <div class="code-language">{language}</div>
@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
 
 Example structure:
 <h1 class="text-md font-bold my-2">Title</h1>
-<p class="text-muted-foreground text-base my-2">Intro...</p>
+<p class="text-muted-foreground text-base">Intro...</p>
 <ul class="my-2"><li class="my-2">Item</li></ul>
 [Code block as shown above]
 <p class="text-muted-foreground text-base my-2">Conclusion with <a href="..." class="text-white underline my-2">link</a>.</p>
@@ -146,7 +146,7 @@ Example structure:
           },
           {
             role: "user",
-            content: `Use the following pieces of context (or previous conversation if needed) to answer the user's question. If the question is not related to the context, say "I'm sorry, I can only answer questions related to this code documentation.", don't try to make up an answer.\n
+            content: `Use the following pieces of context (or previous conversation if needed) to answer the user's question. If the question is not related to the context, say "I'm sorry, I can only answer questions related to this SaaS.", don't try to make up an answer.\n
       \n----------------\n
       PREVIOUS CONVERSATION:
       ${formattedPrevMessages.map((message: any) => {

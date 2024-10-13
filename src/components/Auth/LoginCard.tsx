@@ -13,6 +13,7 @@ import PasswordInput from "./PasswordInput";
 import { login } from "@/app/login/action";
 import { createClient } from "@/utils/supabase/client";
 import { useToast } from "../ui/use-toast";
+import GoogleSignInButton from "./GoogleAuthButton";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -43,7 +44,7 @@ const LoginCard = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const supabase = createClient();
-  const { toast } = useToast();
+  const toaster = useToast();
 
   // Move searchParams check to useEffect to avoid Suspense requirement
   useEffect(() => {
@@ -80,9 +81,9 @@ const LoginCard = (): JSX.Element => {
           ? error.message
           : "Something went wrong during login.";
       setErrors({ loggingIn: errorMessage });
-      toast({
+      toaster.toast({
         title: "Login failed",
-        description: errorMessage,
+        description: "Please try again later.",
       });
     } finally {
       setIsLoading(false);
@@ -164,12 +165,14 @@ const LoginCard = (): JSX.Element => {
             <Button
               className={`w-full ${isLoading ? "pointer-events-none" : ""}`}
               type="submit"
+              variant={"outline"}
               disabled={isLoading}
             >
               {isLoading ? <Spinner /> : "Log in"}
             </Button>
           </div>
         </form>
+        <GoogleSignInButton />
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?{" "}
           <Link href="/signup" className="underline">

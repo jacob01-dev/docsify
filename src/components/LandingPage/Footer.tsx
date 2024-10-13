@@ -11,7 +11,7 @@ const Footer = (): JSX.Element => {
               <h2 className="text-white text-xl font-bold">Docsify</h2>
             </div>
             <p className="text-sm text-gray-500">
-              Create and deploy your personalized chatbot in minutes.
+              Tailored Technical Support for your SaaS.
             </p>
           </div>
 

@@ -16,7 +16,7 @@ const faqs = [
   {
     question: "What can I use Docsify for?",
     answer:
-      "If you have code documentation on your website, Docsify lets you turn it into a chatbot. It's great for businesses and SaaS platforms to enhance support and user experience.",
+      "You can turn your knowledge base into a chatbot and let your users find the best answer to their questions. It's great for businesses and SaaS platforms to enhance support and user experience.",
   },
   {
     question: "What LLMs are supported?",

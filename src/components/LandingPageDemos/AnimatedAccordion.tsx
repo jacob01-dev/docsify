@@ -48,7 +48,7 @@ const previewBoxVariants = {
 const items = [
   {
     title: "Upload",
-    content: `Prepare your code documentation.`,
+    content: `Prepare your knowledge base.`,
     maxHeight: 160,
   },
   {
@@ -84,7 +84,7 @@ const Accordion = () => {
     switch (openIndex) {
       case null:
         return (
-          <div className="p-4 flex items-center justify-center ">
+          <div className="p-4 flex items-center justify-center">
             <Loader />
           </div>
         );
@@ -133,7 +133,7 @@ const Accordion = () => {
       </motion.div>
       <motion.div
         className={cn(
-          "bg-slate-300 aspect-[4/3] lg:aspect-auto h-full w-full relative",
+          "bg-slate-300 lg:aspect-auto flex flex-grow w-full relative",
           "bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
           "transform-gpu dark:bg-black dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-30px_#ffffff1f_inset] rounded-tr-sm rounded-bl-sm"
         )}
@@ -143,7 +143,7 @@ const Accordion = () => {
         // exit={"hidden"}
       >
         <motion.div
-          className="w-full min-h-full flex items-center justify-center py-6"
+          className="w-full flex-grow flex items-center justify-center py-6 justify-self-center"
           variants={itemVariants}
         >
           {<ComponentPicker />}

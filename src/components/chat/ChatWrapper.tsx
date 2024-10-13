@@ -54,11 +54,13 @@ const ChatWrapper = ({ chatbot_id }: { chatbot_id: string }): JSX.Element => {
   return (
     <div className="h-screen flex flex-col bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm">
+      {/* <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <h1 className="text-2xl font-bold text-gray-900">Code Assistant</h1>
+          <h1 className="text-2xl font-bold text-gray-900 text-center">
+            
+          </h1>
         </div>
-      </header>
+      </header> */}
 
       {/* Chat messages */}
       <div
@@ -67,9 +69,23 @@ const ChatWrapper = ({ chatbot_id }: { chatbot_id: string }): JSX.Element => {
       >
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
-            <MessageSquare className="w-12 h-12 text-blue-500 mb-4" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-14 text-blue-500 mb-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"
+              />
+            </svg>
+
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Ready to Code?
+              Need Help?
             </h2>
             <p className="text-gray-400">
               Ask your first question to get started.

@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import Spinner from "../Spinner";
 import { signup } from "@/app/login/action";
+import GoogleSignInButton from "./GoogleAuthButton";
 
 const signupSchema = z
   .object({
@@ -163,6 +164,7 @@ const SignupCard = (): JSX.Element => {
               className={`w-full ${isLoading ? "pointer-events-none" : ""}`}
               type="submit"
               disabled={isLoading}
+              variant={"outline"}
             >
               {isLoading ? <Spinner /> : "Sign up"}
             </Button>
@@ -171,11 +173,9 @@ const SignupCard = (): JSX.Element => {
                 {errors.loggingIn}
               </p>
             )}
-            {/* <Button variant="outline" className="w-full">
-            Sign up with Google
-          </Button> */}
           </div>
         </form>
+        <GoogleSignInButton />
         <div className="mt-4 text-center text-sm">
           Already have an account?{" "}
           <Link href="/login" className="underline">

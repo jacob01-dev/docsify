@@ -27,7 +27,7 @@ const features = [
     Icon: Search,
     name: "Instant Access",
     description:
-      "Find answers instantly, without scrolling through lengthy documentation.",
+      "Let your users to find the best answer to their questions in seconds.",
     href: "#",
     cta: "Learn more",
     className: "col-span-3 lg:col-span-2",
@@ -37,8 +37,8 @@ const features = [
   },
   {
     Icon: BookOpenText,
-    name: "Streamline learning process",
-    description: "Simplify your user's learning process in just a few moments.",
+    name: "Reduce support requests",
+    description: "Help your users at any time with tailored AI support.",
     href: "#",
     cta: "Learn more",
     className: "col-span-3 lg:col-span-2",

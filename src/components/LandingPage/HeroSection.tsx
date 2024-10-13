@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useEffect } from "react";
+import SparklesText from "../ui/sparkles-text";
 
 const HeroSection = (): JSX.Element => {
   const containerVariants = {
@@ -64,13 +65,21 @@ const HeroSection = (): JSX.Element => {
           variants={itemVariants}
           className="z-10 px-4 max-w-7xl bg-gradient-to-br from-white to-[#71717a] bg-clip-text text-center text-4xl font-medium leading-tight text-transparent sm:leading-tight md:text-7xl md:leading-tight"
         >
-          Transform Your Code Documentation Into a Chatbot
+          Tailored Technical Support <br></br>for your{" "}
+          <span className="text-foreground">
+            <SparklesText
+              text="SaaS"
+              className="inline text-4xl font-medium leading-tight text-foreground sm:leading-tight md:text-7xl md:leading-tight"
+              colors={{ first: "#71717a", second: "#fff" }}
+            />
+          </span>
         </motion.h2>
         <motion.p
           variants={itemVariants}
           className="z-10 text-foreground/60 max-w-prose lg:max-w-3xl text-center text-md lg:text-xl px-4 my-6"
         >
-          Create and deploy your own personalized code assistant in minutes
+          Easily convert your knowledge base into a chatbot and boost your
+          customer support efficiency.
         </motion.p>
         <motion.div variants={itemVariants} className="z-10 w-full lg:w-1/2">
           <Link

@@ -62,4 +62,12 @@
   code {
     @apply p-2;
   }
+
+  ol {
+    @apply list-decimal list-inside;
+  }
+
+  ul {
+    @apply list-disc list-inside;
+  }
 }
