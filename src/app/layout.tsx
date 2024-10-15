@@ -10,9 +10,9 @@ export const metadata: Metadata = {
   verification: {
     google: "3E4ho7xj5J19g3F-BdwiMUDsq0xy1jJj5j0hr_T0IDM",
   },
-  title: "Docsify | Transform your Code Documentation into a Chatbot",
+  title: "Docsify | Tailored Technical Support for Your SaaS",
   description:
-    "AI powered app that allows you to chat with your code documentation for your project",
+    "Easily convert your knowledge base into a chatbot and boost your customer support efficiency.",
   icons: {
     icon: "/favicon.ico",
   },
