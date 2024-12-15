@@ -8,7 +8,7 @@ const rubik = Rubik({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   verification: {
-    google: "3E4ho7xj5J19g3F-BdwiMUDsq0xy1jJj5j0hr_T0IDM",
+    google: "",
   },
   title: "Docsify | Tailored Technical Support for Your SaaS",
   description:
